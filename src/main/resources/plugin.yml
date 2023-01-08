@@ -1,0 +1,7 @@
+name: Coinsystem
+version: '${project.version}'
+main: me.moontimer.coinsystem.CoinSystem
+authors: [ MoonTimer ]
+description: CoinSystem
+depend:
+  - PlaceholderAPI
