@@ -21,7 +21,7 @@ public final class CoinSystem extends JavaPlugin {
         mySQLFile.loadDatas();
         mysql = new MySQL(mySQLFile);
 
-        coinAPI = new CoinAPI(mysql);
+        coinAPI = new CoinAPI();
         coinAPI.createTable();
         getCommand("money").setExecutor(new MoneyCommand());
         new MoneyExpansion().register();

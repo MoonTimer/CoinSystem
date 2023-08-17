@@ -1,4 +1,4 @@
-name: Coinsystem
+name: CoinSystem
 version: '${project.version}'
 main: me.moontimer.coinsystem.CoinSystem
 authors: [ MoonTimer ]

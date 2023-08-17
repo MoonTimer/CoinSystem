@@ -1,5 +1,6 @@
 package me.moontimer.coinsystem.api;
 
+import me.moontimer.coinsystem.CoinSystem;
 import me.moontimer.coinsystem.mysql.MySQL;
 import org.bukkit.entity.Player;
 
@@ -9,9 +10,8 @@ import java.util.UUID;
 
 public class CoinAPI {
 
-    MySQL mysql;
-    public CoinAPI(MySQL mysql) {
-        this.mysql = mysql;
+    private final MySQL mysql = CoinSystem.getInstance().getMysql();
+    public CoinAPI() {
     }
 
     public void createTable() {
