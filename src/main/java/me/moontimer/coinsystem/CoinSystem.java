@@ -25,6 +25,20 @@ public final class CoinSystem extends JavaPlugin {
         coinAPI.createTable();
         getCommand("money").setExecutor(new MoneyCommand());
         new MoneyExpansion().register();
+        getLogger().info("");
+        getLogger().info("");
+        getLogger().info("");
+        getLogger().info(" _______  _______ _________ _        _______  _______ _________\n" +
+                "(  ____ \\(  ___  )\\__   __/( (    /|(  ___  )(  ____ )\\__   __/\n" +
+                "| (    \\/| (   ) |   ) (   |  \\  ( || (   ) || (    )|   ) (   \n" +
+                "| |      | |   | |   | |   |   \\ | || (___) || (____)|   | |   \n" +
+                "| |      | |   | |   | |   | (\\ \\) ||  ___  ||  _____)   | |   \n" +
+                "| |      | |   | |   | |   | | \\   || (   ) || (         | |   \n" +
+                "| (____/\\| (___) |___) (___| )  \\  || )   ( || )      ___) (___\n" +
+                "(_______/(_______)\\_______/|/    )_)|/     \\||/       \\_______/");
+        getLogger().info("");
+        getLogger().info("");
+        getLogger().info("                                        §aBy MoonTimer");
     }
 
     @Override
