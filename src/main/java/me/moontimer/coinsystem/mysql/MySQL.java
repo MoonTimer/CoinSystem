@@ -1,7 +1,6 @@
 package me.moontimer.coinsystem.mysql;
 
 import com.sun.rowset.CachedRowSetImpl;
-import com.zaxxer.hikari.HikariDataSource;
 import me.moontimer.coinsystem.CoinSystem;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -11,7 +10,7 @@ public class MySQL {
     String ip, database, username, password;
     Integer port;
 
-    HikariDataSource hikariDataSource;
+    private Connection connection;
 
     public MySQL(MySQLFile mySQLFile) {
         this.ip = mySQLFile.getIp();
@@ -20,12 +19,12 @@ public class MySQL {
         this.password = mySQLFile.getPassword();
         this.port = mySQLFile.getPort();
 
-        hikariDataSource = new HikariDataSource();
-
-        hikariDataSource.setJdbcUrl("jdbc:mysql://" + mySQLFile.getIp() + ":" + mySQLFile.getPort() + "/" + mySQLFile.getDatabase());
-        hikariDataSource.setUsername(mySQLFile.getUsername());
-        hikariDataSource.setPassword(mySQLFile.getPassword());
-        hikariDataSource.setMaximumPoolSize(25);
+        String url = "jdbc:mysql://" + mySQLFile.getIp() + "/" + mySQLFile.getDatabase();
+        try {
+            connection = DriverManager.getConnection(url, mySQLFile.getUsername(), mySQLFile.getPassword());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -34,7 +33,7 @@ public class MySQL {
             @Override
             public void run() {
 
-                try(PreparedStatement preparedStatement = hikariDataSource.getConnection().prepareStatement(query)){
+                try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
                     preparedStatement.executeUpdate();
                     preparedStatement.close();
                 } catch (SQLException e) {
@@ -48,13 +47,11 @@ public class MySQL {
     }
 
     public ResultSet executeQuery(final String qry) {
-        Connection connection = null;
         Statement stmt = null;
         ResultSet resultSet = null;
         CachedRowSetImpl crs = null;
 
         try {
-            connection = hikariDataSource.getConnection();
 
             stmt = connection.createStatement();
             resultSet = stmt.executeQuery(qry);
